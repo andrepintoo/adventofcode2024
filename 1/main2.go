@@ -4,9 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"log"
-	"math"
 	"os"
-	"sort"
 )
 
 func main() {
@@ -17,7 +15,7 @@ func main() {
 	defer file.Close()
 
 	left := make([]int, 0)
-	right := make([]int, 0)
+	right := make(map[int]int)
 	var l, r int
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
@@ -27,18 +25,16 @@ func main() {
 			log.Fatal("error parsing line")
 		}
 		left = append(left, l)
-		right = append(right, r)
+		right[r]++
 	}
 
-	sort.Ints(left)
-	sort.Ints(right)
-
-	distance := 0
-	for i := range left {
-		distance += int(math.Abs(float64(left[i] - right[i])))
+	score := 0
+	for _, v := range left {
+		occurrences := right[v]
+		score += (v * occurrences)
 	}
 
-	fmt.Printf("Result: %d \n", distance)
+	fmt.Printf("Result: %d \n", score)
 	if err = scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
