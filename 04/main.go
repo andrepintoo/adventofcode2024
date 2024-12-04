@@ -55,18 +55,18 @@ func main() {
 					result++
 				}
 
-				//   S
-				//  A
-				// M
-				//X
-				if matchPattern(matrix, i, j, -1, -1, xmas) {
-					result++
-				}
-
 				//S
 				// A
 				//  M
 				//   X
+				if matchPattern(matrix, i, j, -1, -1, xmas) {
+					result++
+				}
+
+				//   X
+				//  M
+				// A
+				//S
 				if matchPattern(matrix, i, j, 1, -1, xmas) {
 					result++
 				}
